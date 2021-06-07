@@ -9,12 +9,13 @@ yum install -y screen
 yum install -y net-tools
 wget -q -O - https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | TAG=v0.6.2 bash
 wget -O /root/cashout.sh https://gist.githubusercontent.com/ralph-pichler/3b5ccd7a5c5cd0500e6428752b37e975/raw/aa576d6d28b523ea6f5d4a1ffb3c8cc0bbc2677f/cashout.sh && chmod 777 /root/cashout.sh
-wget -O /root/cha.sh https://download.swarmeth.org/centos/cha.sh && chmod a+x /root/cha.sh
-wget -O /root/ds.sh https://download.swarmeth.org/centos/ds.sh && chmod a+x /root/ds.sh
-wget -O /root/qidong.sh https://download.swarmeth.org/centos/qidong.sh && chmod a+x /root/qidong.sh
-wget -O /root/mima.sh https://download.swarmeth.org/centos/mima.sh && chmod a+x /root/mima.sh
-wget https://download.swarmeth.org/centos/password
-mv password /home/
+if [ ! -f /home/password ]; then
+date "+【%Y-%m-%d %H:%M:%S】  /home/password" 
+echo "请输入您的节点密码，位置-> 【/home/password】:"
+read  n
+echo  $n > /home/password;
+date "+【%Y-%m-%d %H:%M:%S】 您输入的密码是: " && cat /home/password  
+fi
 iptables -I INPUT -p tcp --dport 1635 -j ACCEPT
 iptables -I INPUT -p tcp --dport 1634 -j ACCEPT
 iptables -I INPUT -p tcp --dport 1635 -j ACCEPT
@@ -26,7 +27,7 @@ block-time: "15"
 bootnode:
 - /dnsaddr/bootnode.ethswarm.org
 config: /home/node1.yaml
-cache-capacity: "1000000"
+cache-capacity: "1500000"
 full-node: true
 data-dir: /home/bee/node1
 db-block-cache-capacity: "33554432"
@@ -42,13 +43,11 @@ p2p-ws-enable: true
 verbosity: 5
 swap-enable: true
 swap-initial-deposit: "10000000000000000"
-#swap-endpoint: http://136.243.89.214:8545
+swap-deployment-gas-price: "800000000000"
 swap-endpoint: ${ep}
 welcome-message: "swarmeth团队欢迎您！"
 EOF
-/root/ds.sh
-echo "    接到启动的gBZZ后，使用/root/qidong.sh或者bee start --config /home/node1.yaml启动"
-rm -rf main.sh
+echo "    接到启动的gBZZ后，使用bee start --config /home/node1.yaml启动"
 rm -rf sub.sh
 bee start --config /home/node1.yaml
 
