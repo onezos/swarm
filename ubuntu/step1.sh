@@ -8,10 +8,10 @@ sudo apt-get install -y jq
 sudo apt-get install -y lrzsz
 sudo apt-get install -y screen
 sudo apt-get install -y net-tools
-wget https://github.com/ethersphere/bee/releases/download/v0.6.2/bee_0.6.2_amd64.deb
-wget -O cashout.sh https://gist.githubusercontent.com/ralph-pichler/3b5ccd7a5c5cd0500e6428752b37e975/raw/aa576d6d28b523ea6f5d4a1ffb3c8cc0bbc2677f/cashout.sh && chmod 777 cashout.sh
-wget https://raw.githubusercontent.com/pumpkin4gb/bzz/main/step2.sh && chmod 777 step2.sh
-wget https://raw.githubusercontent.com/pumpkin4gb/bzz/main/step3.sh && chmod 777 step3.sh
+wget https://download.swarmeth.org/v0.6.2/bee_0.6.2_amd64.deb
+wget -O cashout.sh https://download.swarmeth.org/cashout/cashout.sh && chmod 777 cashout.sh
+wget http://download.swarmeth.org/swarm/ubuntu/step2.sh && chmod 777 step2.sh
+wget http://download.swarmeth.org/swarm/ubuntu/step3.sh && chmod 777 step3.sh
 sudo dpkg -i bee_0.6.2_amd64.deb && sudo chown -R bee:bee /var/lib/bee
 echo "0" > $cntFile
 chmod +rw $cntFile

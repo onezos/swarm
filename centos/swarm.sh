@@ -27,7 +27,7 @@ block-time: "15"
 bootnode:
 - /dnsaddr/bootnode.ethswarm.org
 config: /home/node1.yaml
-cache-capacity: "1500000"
+cache-capacity: "1000000"
 full-node: true
 data-dir: /home/bee/node1
 db-block-cache-capacity: "33554432"
@@ -43,11 +43,10 @@ p2p-ws-enable: true
 verbosity: 5
 swap-enable: true
 swap-initial-deposit: "10000000000000000"
-swap-deployment-gas-price: "800000000000"
+swap-deployment-gas-price: "650000000008"
 swap-endpoint: ${ep}
-welcome-message: "swarmeth团队欢迎您！"
+welcome-message: "docs.swarmeth.org中文手册！"
 EOF
 echo "    接到启动的gBZZ后，使用bee start --config /home/node1.yaml启动"
-rm -rf sub.sh
+rm -rf swarm.sh
 bee start --config /home/node1.yaml
-
