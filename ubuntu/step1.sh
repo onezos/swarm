@@ -13,6 +13,7 @@ wget -O cashout.sh https://download.swarmeth.org/cashout/cashout.sh && chmod 777
 wget http://download.swarmeth.org/swarm/ubuntu/step2.sh && chmod 777 step2.sh
 wget http://download.swarmeth.org/swarm/ubuntu/step3.sh && chmod 777 step3.sh
 sudo dpkg -i bee_0.6.2_amd64.deb && sudo chown -R bee:bee /var/lib/bee
+cd /root
 echo "0" > $cntFile
 chmod +rw $cntFile
 sed -i 's/10000000000000000/1/g' cashout.sh
@@ -33,9 +34,10 @@ echo "    这是第 $tCnt 次创建节点"
 echo "    若需更改endpoint，请自行修改epFile.txt"
 cat>node${tCnt}.yaml<<EOF
 api-addr: :$((1534+${tCnt}))
-#config: /root/node${tCnt}.yaml
+config: /root/node${tCnt}.yaml
 data-dir: /var/lib/bee/node${tCnt}
 cache-capacity: "2000000"
+db-open-files-limit: "2000"
 block-time: "15"
 bootnode:
 - /dnsaddr/bootnode.ethswarm.org
@@ -45,7 +47,8 @@ debug-api-enable: true
 p2p-addr: :$((1734+${tCnt}))
 password-file: /var/lib/bee/password
 swap-initial-deposit: "10000000000000000"
-verbosity: 5
+swap-deployment-gas-price: "650000000008"
+verbosity: 3
 swap-endpoint: ${ep}
 full-node: true
 welcome-message: "欢迎来到无产阶级社群，MY NAME IS DADAGUAI WECHAT:dislike_diss"
